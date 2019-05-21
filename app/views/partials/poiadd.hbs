@@ -1,0 +1,43 @@
+
+<section class="ui raised segment">
+    <div class="ui grid">
+        <div class="ui ten wide column">
+            <div class="ui stacked fluid form segment">
+                <form action="/pointadd" method="POST">
+                    <h3 class="ui header">{{title}}</h3>
+                    <div class="two fields">
+                        <div class="field">
+                            <label>POI Name</label>
+                            <input placeholder="poi name" type="text" name="name">
+                        </div>
+                        <div class="field">
+                            <label>Category</label>
+                            <input placeholder="Category" type="text" name="category">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Description</label>
+                        <input placeholder="description" type="text" name="description">
+                    </div>
+                    <div class="field">
+                        <label>Image</label>
+                        <input placeholder="image location" type="text" name="image">
+                    </div>
+                    <div class="two fields">
+                        <div class="field">
+                            <label>Location latitude</label>
+                            <input placeholder = 00.00 type="Number" name="lat">
+                        <div class="field">
+                            <label>Location longitude</label>
+                            <input placeholder = 00.00 type="Number" name="lng">
+                        </div>
+                    </div>
+                    <button class="ui blue submit button">Submit</button>
+                 </form>
+            </div>
+        </div>
+        <aside class="ui five wide column">
+            <img src="images/homer3.png" class="ui medium image">
+        </aside>
+    </div>
+</section>

@@ -1,0 +1,90 @@
+{
+  "donationService": "http://localhost:3000",
+  "users": [
+    {
+      "firstName": "Homer",
+      "lastName": "Simpson",
+      "email": "homer@simpson.com",
+      "password": "secret"
+    },
+    {
+      "firstName": "Marge",
+      "lastName": "Simpson",
+      "email": "marge@simpson.com",
+      "password": "secret"
+    },
+    {
+      "firstName": "Bart",
+      "lastName": "Simpson",
+      "email": "bart@simpson.com",
+      "password": "secret"
+    }
+  ],
+  "candidates": [
+    {
+      "firstName": "Lisa",
+      "lastName": "Simpson",
+      "office": "President"
+    },
+    {
+      "firstName": "Donald",
+      "lastName": "Simpson",
+      "office": "President"
+    }
+  ],
+  "donations": [
+    {
+      "amount": 40,
+      "method": "paypal"
+    },
+    {
+      "amount": 90,
+      "method": "direct"
+    },
+    {
+      "amount": 430,
+      "method": "paypal"
+    }
+  ],
+  "newCandidate": {
+    "firstName": "Barnie",
+    "lastName": "Grumble",
+    "office": "President"
+  },
+  "newUser": {
+    "firstName": "Maggie",
+    "lastName": "Simpson",
+    "email": "maggie@simpson.com",
+    "password": "secret"
+  },
+  "newPoint": {
+    "name": "new Point Test",
+    "category": "Islands",
+    "description": " a new island to test",
+    "image": "na",
+    "location": "5ce1d66ffc9e2d3ea48bf574"
+  },
+  "points": [
+    {
+      "name": "one new Point Test",
+      "category": "Islands",
+      "description": " first new island to test",
+      "image": "na",
+      "location": "5ce1d66ffc9e2d3ea48bf574"
+    },
+    {
+      "name": "two new Point Test",
+      "category": "Islands",
+      "description": " 2nd new island to test",
+      "image": "na",
+      "location": "5ce1d0dafc9e2d3ea48bf572"
+    },
+    {
+      "name": "three Point Test",
+      "category": "Islands",
+      "description": " 3rd new island to test",
+      "image": "na",
+      "location": "5ce1cf35fc9e2d3ea48bf56e"
+    }
+  ]
+}
