@@ -17,7 +17,7 @@ const Users = {
     auth: false,
     handler: async function(request, h) {
       try {
-        const user = await User.findOne({ _id: request.params.id });
+        const user = await User.findOne({ email: request.payload.email });
         if (!user) {
           return Boom.notFound('No User with this id');
         }

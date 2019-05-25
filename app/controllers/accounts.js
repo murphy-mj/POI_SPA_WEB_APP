@@ -71,6 +71,8 @@ const Accounts = {
       return h.view('login', { title: 'Login to Donations' });
     }
   },
+
+
   login: {
     auth: false,
     validate: {
@@ -96,6 +98,8 @@ const Accounts = {
            const payload = request.payload;
 
           try {
+
+            console.log("Email : " + payload.email)
         let user = await User.findByEmail(payload.email);
         if (!user) {
           const message = 'Email address is not registered';
@@ -103,11 +107,13 @@ const Accounts = {
         }
         user.comparePassword(payload.password);
 
-       console.log(user._id + " here "+ user.email)
-        console.log(request.cookieAuth);
-       console.log(request.auth.credentials.id + "  id there before");
-        request.cookieAuth.set({id: user._id });
-        console.log(request.auth.credentials.id + "  id there before");
+       //console.log(user._id + " here "+ user.email)
+       // console.log(request.cookieAuth);
+     //  console.log(request.auth.credentials.id + "  id there before");
+
+              request.cookieAuth.set({id: user._id });
+
+     //   console.log(request.auth.credentials.id + "  id there before");
         return h.redirect('/home');
       } catch (err) {
         return h.view('login', { errors: [{ message: err.message }] });

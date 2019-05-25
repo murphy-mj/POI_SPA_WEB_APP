@@ -14,6 +14,8 @@ const Points = {
             return points;
         }
     },
+
+
    // findByCategory: {
    //     auth: false,
    //     handler: async function(request, h) {
@@ -21,6 +23,7 @@ const Points = {
    //         return points;
    //     }
    // },
+
     findOne: {
         auth: false,
         handler: async function(request, h) {
@@ -46,9 +49,7 @@ const Points = {
             if (!point) {
                 return Boom.notFound('No Point with this id');
             }
-       //     poi.user = user._id;
-        //    let p = await newpoint.save();
-        //    return p;
+            return point;
         }
     },
 

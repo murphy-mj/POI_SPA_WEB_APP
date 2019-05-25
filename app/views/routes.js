@@ -1,9 +1,9 @@
 'use strict';
 
-const Accounts = require('./app/controllers/accounts');
-const Donations = require('./app/controllers/donations');
-const Points = require('./app/controllers/points');
-const Comments = require('./app/controllers/comments');
+const Accounts = require('../controllers/accounts');
+const Donations = require('../controllers/donations');
+const Points = require('../controllers/points');
+const Comments = require('../controllers/comments');
 
 
 module.exports = [

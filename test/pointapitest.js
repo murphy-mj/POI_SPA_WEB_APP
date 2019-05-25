@@ -25,8 +25,8 @@ suite('Points of Interests API tests', function () {
   });
 
   test('create a point', async function () {
-    const returnedCandidate = await donationService.createPoint(newPoint);
-    assert(_.some([returnedPoint], newPoint), 'returnedCandidate must be a superset of newCandidate');
+    const returnedPoint = await donationService.createPoint(newPoint);
+    assert(_.some([returnedPoint], newPoint), 'returnedPoint must be a superset of newPoint');
     assert.isDefined(returnedPoint._id);
   });
 
