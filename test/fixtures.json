@@ -35,15 +35,21 @@
   "donations": [
     {
       "amount": 40,
-      "method": "paypal"
+      "method": "paypal",
+      "donor": "na",
+      "candidate":"na"
     },
     {
       "amount": 90,
-      "method": "direct"
+      "method": "direct",
+      "donor": "na",
+      "candidate":"na"
     },
     {
       "amount": 430,
-      "method": "paypal"
+      "method": "paypal",
+      "donor": "na",
+      "candidate":"na"
     }
   ],
   "newCandidate": {
@@ -86,5 +92,32 @@
       "image": "na",
       "location": "5ce1cf35fc9e2d3ea48bf56e"
     }
-  ]
+  ],
+  "comments2": [
+    {
+      "opinion": "this one is great",
+      "user": "567890",
+      "point": "123456789"
+    },
+    {
+      "opinion": "this one is great too",
+      "user": "123567890",
+      "point": "908456789"
+    }
+],
+  "comments": [
+    {
+      "opinion" : "this one is great",
+      "user": "na",
+      "point": "na"
+    },
+    {
+      "opinion" : "this one is great too",
+      "user": "na",
+      "point": "na"
+    }
+  ],
+  "newcomment": {
+    "opinion": "feck!"
+  }
 }

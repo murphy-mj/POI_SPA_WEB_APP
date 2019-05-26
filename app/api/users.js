@@ -2,11 +2,32 @@
 
 const Boom = require('boom');
 const User = require('../models/user');
+const utils = require('./utils.js');
+
 
 const Users = {
 
-  find: {
+  authenticate: {
     auth: false,
+    handler: async function(request, h) {
+      try {
+        const user = await User.findOne({ email: request.payload.email });
+        if (!user) {
+          return Boom.notFound('Authentication failed. User not found');
+        }
+        const token = utils.createToken(user);
+        return h.response({ success: true, token: token }).code(201);
+      } catch (err) {
+        return Boom.notFound('internal db failure');
+      }
+    }
+  },
+
+  find: {
+    auth: {
+      strategy: 'jwt',
+    },
+    //auth: false,
     handler: async function(request, h) {
       const users = await User.find();
       return users;
@@ -14,10 +35,13 @@ const Users = {
   },
 
   findOne: {
-    auth: false,
+    auth: {
+      strategy: 'jwt',
+    },
+    // auth: false,
     handler: async function(request, h) {
       try {
-        const user = await User.findOne({ email: request.payload.email });
+        const user = await User.findOne({ _id: request.params.id});
         if (!user) {
           return Boom.notFound('No User with this id');
         }
@@ -41,7 +65,10 @@ const Users = {
   },
 
   deleteAll: {
-    auth: false,
+    auth: {
+      strategy: 'jwt',
+    },
+    //auth: false,
     handler: async function(request, h) {
       await User.deleteMany({});
       return { success: true };
@@ -49,7 +76,10 @@ const Users = {
   },
 
   deleteOne: {
-    auth: false,
+    auth: {
+      strategy: 'jwt',
+    },
+    // auth: false,
     handler: async function(request, h) {
       const user = await User.deleteOne({ _id: request.params.id });
       if (user) {

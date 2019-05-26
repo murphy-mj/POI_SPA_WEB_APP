@@ -7,6 +7,20 @@ class DonationService {
     this.baseUrl = baseUrl;
   }
 
+  async authenticate(user) {
+    try {
+      const response = await axios.post(this.baseUrl + '/api/users/authenticate', user);
+      axios.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.token;
+      return response.data;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  async clearAuth(user) {
+    axios.defaults.headers.common['Authorization'] = '';
+  }
+
   async getUsers() {
     try {
       const response = await axios.get(this.baseUrl + '/api/users');
@@ -106,6 +120,15 @@ class DonationService {
     }
   }
 
+  async getDonations() {
+    try {
+      const response = await axios.get(this.baseUrl + '/api/donations');
+      return response.data;
+    } catch (e) {
+      return null;
+    }
+  }
+
   async getDonations(id) {
     try {
       const response = await axios.get(this.baseUrl + '/api/candidates/' + id + '/donations');
@@ -123,6 +146,8 @@ class DonationService {
       return null;
     }
   }
+
+
 
   async getPoints() {
     try {
@@ -172,7 +197,7 @@ class DonationService {
 
   async makeComment(id, comment) {
     try {
-      const repsonse = await axios.post(this.baseUrl + '/api/comments/' + id + '/comments', comment);
+      const repsonse = await axios.post(this.baseUrl + '/api/points/' + id + '/comments', comment);
       return repsonse.data;
     } catch (e) {
       return null;
@@ -181,7 +206,7 @@ class DonationService {
 
   async getComments(id) {
     try {
-      const response = await axios.get(this.baseUrl + '/api/comments/' + id + '/comments');
+      const response = await axios.get(this.baseUrl + '/api/points/' + id + '/comments');
       return response.data;
     } catch (e) {
       return null;

@@ -29,7 +29,7 @@ module.exports = [
   { method: 'POST', path: '/api/points/{id}/comments', config: Comments.makeComment },
   { method: 'DELETE', path: '/api/comments', config: Comments.deleteAll },
 
-
+  { method: 'POST', path: '/api/users/authenticate', config: Users.authenticate },
 //    { method: 'GET', path: '/api/pointInterests', config: PointInterest.findAll },
 //    { method: 'GET', path: '/api/pointInterests/{id}/poi', config: PointInterest.findByCategory },
     // { method: 'POST', path: '/api/pointInterests/{id}/poi', config: PointInterest.AddPOI },

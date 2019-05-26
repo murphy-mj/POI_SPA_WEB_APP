@@ -12,8 +12,22 @@ suite('User API tests', function () {
 
   const donationService = new DonationService(fixtures.donationService);
 
-  setup(async function () {
+
+  suiteSetup(async function() {
     await donationService.deleteAllUsers();
+    const returnedUser = await donationService.createUser(newUser);
+    const response = await donationService.authenticate(newUser);
+  });
+
+  suiteTeardown(async function() {
+    await donationService.deleteAllUsers();
+    donationService.clearAuth();
+  });
+
+
+
+  setup(async function () {
+   await donationService.deleteAllUsers();
   });
 
   teardown(async function () {
@@ -22,13 +36,21 @@ suite('User API tests', function () {
 
   test('create a user', async function () {
     const returnedUser = await donationService.createUser(newUser);
+    console.log(" returned user in create user = ");
+    console.log(returnedUser);
     assert(_.some([returnedUser], newUser), 'returnedUser must be a superset of newUser');
     assert.isDefined(returnedUser._id);
   });
 
   test('get user', async function () {
+    console.log("get user, create first");
+    console.log(newUser);
     const u1 = await donationService.createUser(newUser);
+    console.log("this is U1, get user ");
+    console.log(u1);
     const u2 = await donationService.getUser(u1._id);
+    console.log("this is U2, get user ");
+    console.log(u2);
     assert.deepEqual(u1, u2);
   });
 
@@ -41,6 +63,7 @@ suite('User API tests', function () {
 
 
   test('delete a user', async function () {
+
     let u = await donationService.createUser(newUser);
     assert(u._id != null);
     await donationService.deleteOneUser(u._id);
@@ -48,7 +71,14 @@ suite('User API tests', function () {
     assert(u == null);
   });
 
+
+
   test('get all users', async function () {
+    await donationService.deleteAllUsers();
+
+    await donationService.createUser(newUser);
+    await donationService.authenticate(newUser);
+    console.log(users);
     for (let u of users) {
       await donationService.createUser(u);
     }
@@ -57,20 +87,40 @@ suite('User API tests', function () {
     assert.equal(allUsers.length, users.length);
   });
 
+
+
   test('get users detail', async function () {
+    await donationService.deleteAllUsers();
+    await donationService.createUser(newUser);
+    await donationService.authenticate(newUser);
+
     for (let u of users) {
       await donationService.createUser(u);
     }
+    const testUser = {
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      password: user.password
+    };
+    // unshift add to start of array, so users not comparable
+    //users.unshift(testUser);
+    users.add(testUser);
+
 
     const allUsers = await donationService.getUsers();
-    for (var i = 0; i < users.length; i++) {
+    //for (var i = 0; i < users.length; i++) {
+     for (var i = 0; i < allUsers.length; i++) {
       assert(_.some([allUsers[i]], users[i]), 'returnedUser must be a superset of newUser');
     }
   });
 
   test('get all users empty', async function () {
+    await donationService.deleteAllUsers();
+    await donationService.createUser(newUser);
+    await donationService.authenticate(newUser);
     const allUsers = await donationService.getUsers();
-    assert.equal(allUsers.length, 0);
+    assert.equal(allUsers.length, 1);
   });
 
 });

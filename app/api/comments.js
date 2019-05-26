@@ -5,18 +5,24 @@ const Donation = require('../models/donation');
 const Candidate = require('../models/candidate');
 const Point = require('../models/point');
 const Comment = require('../models/comment');
-
+//const utils = require('./utils.js');
 
 const Comments = {
   findAll: {
-    auth: false,
+    auth: {
+      strategy: 'jwt',
+    },
+    //auth: false,
     handler: async function(request, h) {
       const comments = await Comment.find();
       return comments;
     }
   },
   findByPoint: {
-    auth: false,
+    auth: {
+      strategy: 'jwt',
+    },
+    //auth: false,
     handler: async function(request, h) {
       const comments = await Comment.find({ point: request.params.id });
       return comments;
@@ -24,13 +30,18 @@ const Comments = {
   },
 
   makeComment: {
-    auth: false,
+    auth: {
+      strategy: 'jwt',
+    },
+    //auth: false,
     handler: async function(request, h) {
       let comment = new Comment(request.payload);
       const point = await Point.findOne({ _id: request.params.id });
       if (!point) {
         return Boom.notFound('No Point of Interest with this id');
       }
+      const userId = utils.getUserIdFromRequest(request);
+      comment.user=userId;
       comment.point = point._id;
       comment = await comment.save();
       return comment;
@@ -38,7 +49,10 @@ const Comments = {
   },
 
   deleteAll: {
-    auth: false,
+    auth: {
+      strategy: 'jwt',
+    },
+    //auth: false,
     handler: async function(request, h) {
       await Comment.deleteMany({});
       return { success: true };
